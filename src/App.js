@@ -24,7 +24,12 @@ function App() {
 
   return (
     <>
-      <HomePage coins={coins} setCoins={setCoins} page={page} />
+      <HomePage
+        coins={coins}
+        setCoins={setCoins}
+        page={page}
+        setPage={setPage}
+      />
     </>
   );
 }
