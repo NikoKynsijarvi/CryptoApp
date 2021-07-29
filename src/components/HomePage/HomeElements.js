@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const HomeContainer = styled.div`
   width: 100%;
@@ -77,7 +78,7 @@ export const InfoText = styled.p`
 
 export const CoinContainer = styled.div`
   height: 100px;
-  width: 200px;
+  width: 210px;
   background-color: rgb(255, 255, 255, 0.3);
   border-radius: 10%;
   display: flex;
@@ -91,6 +92,7 @@ export const CoinContainer = styled.div`
 `;
 
 export const CoinColumn = styled.div`
+  padding: 0.1em;
   float: left;
   width: 50%;
   display: flex;
@@ -140,7 +142,7 @@ export const CoinTr = styled.tr`
   width: 100%;
   height: fit-content;
   display: flex;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.8em;
   @media screen and (max-width: 600px) {
     margin-bottom: 0.2em;
   }
@@ -148,12 +150,15 @@ export const CoinTr = styled.tr`
 
 export const CoinTh = styled.th`
   width: 100px;
+  margin-right: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 `;
 
 export const CoinPriceTh = styled.th`
+  margin-right: 1em;
   width: 100px;
   color: ${({ positive }) => (positive ? "#00F900" : "#FF1717")};
   display: flex;
@@ -172,7 +177,7 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const PageButton = styled.button`
+export const NextButton = styled.button`
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -181,12 +186,26 @@ export const PageButton = styled.button`
   background-color: rgb(0, 0, 0);
   cursor: pointer;
   transition: 0.3s ease-out;
-  :hover {
-    transform: scale(1.1);
-  }
+`;
+
+export const PrevButton = styled.button`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 2px solid white;
+  opacity: ${({ page }) => (page > 1 ? "1)" : "0.5")};
+  color: white;
+  background-color: rgb(0, 0, 0);
+  cursor: pointer;
+  transition: 0.3s ease-out;
 `;
 
 export const PageNumber = styled.p`
   font-size: 30px;
+  color: rgb(255, 255, 255);
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
   color: rgb(255, 255, 255);
 `;

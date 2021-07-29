@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import HomePage from "./components/HomePage";
+import CoinPage from "./components/CoinPage";
 import axios from "axios";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   const [coins, setCoins] = useState({});
@@ -23,14 +25,23 @@ function App() {
   }
 
   return (
-    <>
-      <HomePage
-        coins={coins}
-        setCoins={setCoins}
-        page={page}
-        setPage={setPage}
-      />
-    </>
+    <Router>
+      <>
+        <Switch>
+          <Route path="/coins/:id">
+            <CoinPage coins={coins} />
+          </Route>
+          <Route path="/">
+            <HomePage
+              coins={coins}
+              setCoins={setCoins}
+              page={page}
+              setPage={setPage}
+            />
+          </Route>
+        </Switch>
+      </>
+    </Router>
   );
 }
 

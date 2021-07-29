@@ -17,9 +17,11 @@ import {
   CoinTr,
   CoinTh,
   CoinPriceTh,
-  PageButton,
+  NextButton,
   PageNumber,
   ButtonContainer,
+  PrevButton,
+  StyledLink,
 } from "./HomeElements";
 import { GoTriangleRight, GoTriangleLeft } from "react-icons/go";
 import Bg from "./../../images/bg.jpg";
@@ -33,8 +35,8 @@ function CoinPreview({ coin }) {
     }
   }, [lastH]);
   const price = parseFloat(coin.current_price);
-
   const symbol = coin.symbol;
+
   return (
     <CoinContainer>
       <CoinColumn>
@@ -43,7 +45,10 @@ function CoinPreview({ coin }) {
       <CoinColumn>
         <CoinCurrentPrice positive={positive}>
           {" "}
-          {price < 1 ? (Math.round(price * 100) / 100).toFixed(3) : price} €
+          {price < 1
+            ? (Math.round(price * 100) / 100).toFixed(3)
+            : price.toFixed(2)}{" "}
+          €
         </CoinCurrentPrice>
       </CoinColumn>
     </CoinContainer>
@@ -53,7 +58,6 @@ function CoinPreview({ coin }) {
 function CoinRow({ coin }) {
   const [positive1h, setPositive1h] = useState(false);
   const [positive24h, setPositive24h] = useState(false);
-  console.log(coin);
   const price_24h = parseFloat(coin.price_change_percentage_24h);
   const price_1h = parseFloat(coin.price_change_percentage_1h_in_currency);
 
@@ -71,7 +75,9 @@ function CoinRow({ coin }) {
       <CoinTh>
         <img src={coin.image} alt={"coin"} height="20px" />
       </CoinTh>
-      <CoinTh>{coin.name}</CoinTh>
+      <CoinTh>
+        <StyledLink to={`/coins/${coin.id}`}>{coin.name}</StyledLink>
+      </CoinTh>
       <CoinTh>{coin.current_price} €</CoinTh>
       <CoinPriceTh positive={positive24h}>
         {(Math.round(price_24h * 100) / 100).toFixed(3)} %
@@ -145,14 +151,13 @@ function HomePage({ coins, page, setPage }) {
           </tbody>
         </CoinsTable>
         <ButtonContainer>
-          <PageButton onClick={page > 1 ? () => prevPage() : null}>
+          <PrevButton page={page} onClick={page > 1 ? () => prevPage() : null}>
             <GoTriangleLeft style={style} />
-          </PageButton>
-
+          </PrevButton>
           <PageNumber>{page}</PageNumber>
-          <PageButton onClick={() => nextPage()}>
+          <NextButton onClick={() => nextPage()}>
             <GoTriangleRight style={style} />
-          </PageButton>
+          </NextButton>
         </ButtonContainer>
       </AllCoinsContainer>
     </HomeContainer>
