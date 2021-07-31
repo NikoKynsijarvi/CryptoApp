@@ -82,17 +82,46 @@ export const CoinRow = styled.div`
   }
   @media screen and (max-width: 600px) {
     flex-direction: column;
+    max-width: 100%;
   }
 `;
 export const InfoTable = styled.table`
-  width: 80%;
-  height: 90%;
-  background-color: red;
+  height: 80%;
+  width: 70%;
+  color: white;
+  display: flex;
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 600px) {
     overflow-x: scroll;
     width: 80%;
     justify-content: flex-start;
+    align-items: flex-start;
   }
+`;
+
+export const CoinTr = styled.tr`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  margin-bottom: 1em;
+  border-bottom: 2px solid white;
+  @media screen and (max-width: 600px) {
+    margin-bottom: 0.5em;
+  }
+`;
+
+export const CoinTh = styled.th`
+  width: 200px;
+  margin-right: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: 600px) {
+    width: 200px;
+  }
+`;
+
+export const ColorP = styled.p`
+  color: ${({ positive }) => (positive ? "#00F900" : "#FF1717")};
 `;

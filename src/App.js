@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HomePage from "./components/HomePage";
 import CoinPage from "./components/CoinPage";
+import Loading from "./components/Loading";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -21,7 +22,7 @@ function App() {
   }, [page, setCoins]);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   return (

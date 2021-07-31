@@ -8,25 +8,72 @@ import {
   LinkHome,
   CoinRow,
   InfoTable,
+  CoinTr,
+  CoinTh,
+  ColorP,
 } from "./CoinElements";
 import { GoTriangleLeft } from "react-icons/go";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
+import Loading from "./../Loading";
 
 function CoinTable({ coin }) {
+  const [positiveAth, setPositiveAth] = useState(false);
+  const [positive24h, setPositive24h] = useState(false);
+  const [positive1h, setPositive1h] = useState(false);
+
+  const athDate = coin.ath_date.substring(0, 10);
+  const athChange = parseFloat(coin.ath_change_percentage);
+  const oneH = parseFloat(coin.price_change_percentage_1h_in_currency);
+  const price_24h = parseFloat(coin.price_change_percentage_24h);
+
+  useEffect(() => {
+    if (oneH > 0) {
+      setPositive1h(true);
+    }
+    if (price_24h > 0) {
+      setPositive24h(true);
+    }
+    if (athChange > 0) {
+      setPositiveAth(true);
+    }
+  }, [price_24h, oneH, athChange]);
+
   return (
     <InfoTable>
       <tbody>
-        <tr>
-          <th>
-            <p>ATH</p>
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <p>ATH</p>
-          </th>
-        </tr>
+        <CoinTr>
+          <CoinTh>
+            <p>ATH: {coin.ath} €</p>
+          </CoinTh>
+          <CoinTh>ATL: {coin.atl}</CoinTh>
+          <CoinTh>ATH DATE: {athDate}</CoinTh>
+        </CoinTr>
+        <CoinTr>
+          <CoinTh>
+            <p>PRICE {coin.current_price} €</p>
+          </CoinTh>
+          <CoinTh>MARKET CAP RANK {coin.market_cap_rank}</CoinTh>
+          <CoinTh>MARKET CAP {coin.market_cap} €</CoinTh>
+        </CoinTr>
+        <CoinTr>
+          <CoinTh>
+            24H CHANGE:
+            <ColorP positive={positive24h}> {price_24h} %</ColorP>
+          </CoinTh>
+          <CoinTh>
+            1H CHANGE:
+            <ColorP positive={positive1h}>
+              {(Math.round(oneH * 100) / 100).toFixed(3)} %
+            </ColorP>
+          </CoinTh>
+          <CoinTh>
+            ATH CHANGE:
+            <ColorP positive={positiveAth}>
+              {(Math.round(athChange * 100) / 100).toFixed(3)} %
+            </ColorP>{" "}
+          </CoinTh>
+        </CoinTr>
       </tbody>
     </InfoTable>
   );
@@ -49,11 +96,10 @@ function Coin({ coins }) {
   }, [id]);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   const datasetsPrices = priceData.prices.map((c) => c[1]);
-  console.log(coin);
 
   const data = {
     labels: priceData.prices.map((c) => {
