@@ -6,18 +6,17 @@ import {
   Column,
   CoinImage,
   LinkHome,
-  CoinRow,
-  InfoTable,
-  CoinTr,
-  CoinTh,
-  ColorP,
+  CoinStatsContainer,
+  Stats,
+  ColorH2,
+  StyledH2,
 } from "./CoinElements";
 import { GoTriangleLeft } from "react-icons/go";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
 import Loading from "./../Loading";
 
-function CoinTable({ coin }) {
+function CoinStats({ coin }) {
   const [positiveAth, setPositiveAth] = useState(false);
   const [positive24h, setPositive24h] = useState(false);
   const [positive1h, setPositive1h] = useState(false);
@@ -38,44 +37,45 @@ function CoinTable({ coin }) {
       setPositiveAth(true);
     }
   }, [price_24h, oneH, athChange]);
-
   return (
-    <InfoTable>
-      <tbody>
-        <CoinTr>
-          <CoinTh>
-            <p>ATH: {coin.ath} €</p>
-          </CoinTh>
-          <CoinTh>ATL: {coin.atl}</CoinTh>
-          <CoinTh>ATH DATE: {athDate}</CoinTh>
-        </CoinTr>
-        <CoinTr>
-          <CoinTh>
-            <p>PRICE {coin.current_price} €</p>
-          </CoinTh>
-          <CoinTh>MARKET CAP RANK {coin.market_cap_rank}</CoinTh>
-          <CoinTh>MARKET CAP {coin.market_cap} €</CoinTh>
-        </CoinTr>
-        <CoinTr>
-          <CoinTh>
-            24H CHANGE:
-            <ColorP positive={positive24h}> {price_24h} %</ColorP>
-          </CoinTh>
-          <CoinTh>
-            1H CHANGE:
-            <ColorP positive={positive1h}>
-              {(Math.round(oneH * 100) / 100).toFixed(3)} %
-            </ColorP>
-          </CoinTh>
-          <CoinTh>
-            ATH CHANGE:
-            <ColorP positive={positiveAth}>
-              {(Math.round(athChange * 100) / 100).toFixed(3)} %
-            </ColorP>{" "}
-          </CoinTh>
-        </CoinTr>
-      </tbody>
-    </InfoTable>
+    <CoinStatsContainer>
+      <Stats>
+        <StyledH2>ATH</StyledH2>
+        <StyledH2>{coin.ath} €</StyledH2>
+      </Stats>
+      <Stats>
+        <StyledH2>ATL</StyledH2>
+        <StyledH2>{coin.atl} €</StyledH2>
+      </Stats>
+      <Stats>
+        <StyledH2>PRICE</StyledH2>
+        <StyledH2>{coin.current_price} €</StyledH2>
+      </Stats>
+      <Stats>
+        <StyledH2>MARKET CAP RANK</StyledH2>
+        <StyledH2>{coin.market_cap_rank}</StyledH2>
+      </Stats>
+      <Stats>
+        <StyledH2>24H CHANGE</StyledH2>
+        <ColorH2 positive={positive24h}>{price_24h} %</ColorH2>
+      </Stats>
+      <Stats>
+        <StyledH2>1H CHANGE</StyledH2>
+        <ColorH2 positive={positive1h}>
+          {(Math.round(oneH * 100) / 100).toFixed(3)} %
+        </ColorH2>
+      </Stats>
+      <Stats>
+        <StyledH2>ATH CHANGE</StyledH2>
+        <ColorH2 positive={positiveAth}>
+          {(Math.round(athChange * 100) / 100).toFixed(3)} %
+        </ColorH2>
+      </Stats>
+      <Stats>
+        <h2>ATH DATE</h2>
+        <h2>{athDate}</h2>
+      </Stats>
+    </CoinStatsContainer>
   );
 }
 
@@ -132,9 +132,7 @@ function Coin({ coins }) {
           <Line data={data} />
         </Column>
       </Row>
-      <CoinRow>
-        <CoinTable coin={coin} />
-      </CoinRow>
+      <CoinStats coin={coin} />
     </CoinContainer>
   );
 }

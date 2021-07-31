@@ -85,43 +85,50 @@ export const CoinRow = styled.div`
     max-width: 100%;
   }
 `;
-export const InfoTable = styled.table`
-  height: 80%;
-  width: 70%;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media screen and (max-width: 600px) {
-    overflow-x: scroll;
-    width: 80%;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-`;
 
-export const CoinTr = styled.tr`
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  margin-bottom: 1em;
-  border-bottom: 2px solid white;
-  @media screen and (max-width: 600px) {
-    margin-bottom: 0.5em;
-  }
-`;
-
-export const CoinTh = styled.th`
-  width: 200px;
-  margin-right: 1em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @media screen and (max-width: 600px) {
-    width: 200px;
-  }
-`;
-
-export const ColorP = styled.p`
+export const ColorH2 = styled.h2`
+  font-size: 23px;
   color: ${({ positive }) => (positive ? "#00F900" : "#FF1717")};
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+`;
+
+export const StyledH2 = styled.h2`
+  font-size: 23px;
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+`;
+
+export const CoinStatsContainer = styled.div`
+  position: relative;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 1.5em;
+  padding: 1em;
+  @media screen and (max-width: 600px) {
+    column-count: 2;
+    overflow-y: scroll;
+  }
+`;
+
+export const Stats = styled.div`
+  height: 50px;
+  width: 30%;
+  border-bottom: 2px solid rgba(75, 192, 192, 1);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
+  @media screen and (max-width: 600px) {
+    width: 40%;
+    height: 150px;
+    flex-direction: column;
+  }
 `;
