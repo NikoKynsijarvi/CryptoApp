@@ -9,7 +9,7 @@ export const CoinContainer = styled.div`
   color: white;
   flex-direction: column;
   @media screen and (max-width: 600px) {
-    height: 150vh;
+    height: 175vh;
   }
 `;
 
@@ -113,7 +113,7 @@ export const CoinStatsContainer = styled.div`
   padding: 1em;
   @media screen and (max-width: 600px) {
     column-count: 2;
-    overflow-y: scroll;
+    height: fit-content;
   }
 `;
 

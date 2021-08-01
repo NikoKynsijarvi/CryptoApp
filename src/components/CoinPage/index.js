@@ -72,8 +72,8 @@ function CoinStats({ coin }) {
         </ColorH2>
       </Stats>
       <Stats>
-        <h2>ATH DATE</h2>
-        <h2>{athDate}</h2>
+        <StyledH2>ATH DATE</StyledH2>
+        <StyledH2>{athDate}</StyledH2>
       </Stats>
     </CoinStatsContainer>
   );
