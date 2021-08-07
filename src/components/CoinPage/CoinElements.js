@@ -10,6 +10,7 @@ export const CoinContainer = styled.div`
   flex-direction: column;
   @media screen and (max-width: 600px) {
     height: 175vh;
+    padding-bottom: 3em;
   }
 `;
 
@@ -130,5 +131,27 @@ export const Stats = styled.div`
     width: 40%;
     height: 150px;
     flex-direction: column;
+  }
+`;
+
+export const ButtonGroup = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 1em;
+`;
+
+export const StyledButton = styled.button`
+  color: white;
+  background-color: black;
+  min-width: 70px;
+  border: 3px solid rgba(75, 192, 192, 1);
+  cursor: pointer;
+  :hover {
+    filter: brightness(1.5);
+  }
+  @media screen and (max-width: 600px) {
+    min-width: 40px;
   }
 `;

@@ -10,6 +10,8 @@ import {
   Stats,
   ColorH2,
   StyledH2,
+  ButtonGroup,
+  StyledButton,
 } from "./CoinElements";
 import { GoTriangleLeft } from "react-icons/go";
 import axios from "axios";
@@ -82,18 +84,19 @@ function CoinStats({ coin }) {
 function Coin({ coins }) {
   const [priceData, setPriceData] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [days, setDays] = useState(1);
   const id = useParams().id;
   const coin = coins.find((c) => c.id === String(id));
   useEffect(() => {
     axios
       .get(
-        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=eur&days=7&interval=6h`
+        `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=eur&days=${days}&interval=6h`
       )
       .then((res) => {
         setPriceData(res.data);
         setLoading(false);
       });
-  }, [id]);
+  }, [id, days]);
 
   if (isLoading) {
     return <Loading />;
@@ -107,7 +110,7 @@ function Coin({ coins }) {
     }),
     datasets: [
       {
-        label: `${coin.name} last 7d`,
+        label: `${coin.name} last ${days}d`,
         data: datasetsPrices,
         fill: true,
         backgroundColor: "rgba(75,192,192,0.2)",
@@ -130,6 +133,12 @@ function Coin({ coins }) {
         </Column>
         <Column>
           <Line data={data} />
+          <ButtonGroup>
+            <StyledButton onClick={() => setDays(1)}>1 d</StyledButton>
+            <StyledButton onClick={() => setDays(7)}>7 d</StyledButton>
+            <StyledButton onClick={() => setDays(30)}>30 d</StyledButton>
+            <StyledButton onClick={() => setDays(365)}>1 year</StyledButton>
+          </ButtonGroup>
         </Column>
       </Row>
       <CoinStats coin={coin} />
