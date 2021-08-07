@@ -9,8 +9,8 @@ export const CoinContainer = styled.div`
   color: white;
   flex-direction: column;
   @media screen and (max-width: 600px) {
-    height: 175vh;
-    padding-bottom: 3em;
+    height: 150vh;
+    padding-bottom: 1em;
   }
 `;
 
@@ -104,7 +104,7 @@ export const StyledH2 = styled.h2`
 
 export const CoinStatsContainer = styled.div`
   position: relative;
-  height: 50%;
+  height: 40%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -114,7 +114,8 @@ export const CoinStatsContainer = styled.div`
   padding: 1em;
   @media screen and (max-width: 600px) {
     column-count: 2;
-    height: fit-content;
+
+    overflow-y: scroll;
   }
 `;
 
@@ -153,5 +154,6 @@ export const StyledButton = styled.button`
   }
   @media screen and (max-width: 600px) {
     min-width: 40px;
+    height: 3em;
   }
 `;
